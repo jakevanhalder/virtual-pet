@@ -20,7 +20,7 @@ public:
 	{
 		character.setSize(sf::Vector2f(25, 25));
 		character.setOrigin(character.getSize().x / 2, character.getSize().y / 2);
-		character.setFillColor(sf::Color::Green);
+		character.setFillColor(sf::Color::Cyan);
 		character.setPosition(position);
 
         std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -129,6 +129,19 @@ public:
             // No movement
             break;
         }
+
+        // Check boundaries to ensure the dog stays within the window
+        /*sf::Vector2f windowSize = sf::Vector2f(500, 500);
+
+        if (currentPosition.x = getPosition().x < 0)
+            currentPosition.x = 0;
+        else if (currentPosition.x = getPosition().x > windowSize.x)
+            currentPosition.x = windowSize.x;
+
+        if (currentPosition.y = getPosition().y < 0)
+            currentPosition.y = 0;
+        else if (currentPosition.y = getPosition().y > windowSize.y)
+            currentPosition.y = windowSize.y;*/
 
         // Update the position
         character.move(currentPosition);
