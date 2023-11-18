@@ -146,9 +146,11 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="dog.h" />
     <ClInclude Include="cat.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="gameState.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="tiger.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />

@@ -29,11 +29,14 @@ public:
 	// Dog destructor
 	~Dog() {}
 
+    // dogName() function that allows the user to set the name of a specific dog
+
     void render(sf::RenderTarget* target)
     {
         // drawing the character to the window
 
         target->draw(this->character);
+        target->draw(this->getName());
     }
 
 
@@ -152,7 +155,7 @@ private:
 
     sf::RectangleShape character;
     Movement movement;
-    float movementSpeed = 0.03f;
+    float movementSpeed = 0.015f;
     float timeSinceLastRandomMove;
     float timeBetweenRandomMoves = 25.0f; // Time in seconds between random moves
     int idleProbability = 70; // Probability (in percentage) of IDLE state

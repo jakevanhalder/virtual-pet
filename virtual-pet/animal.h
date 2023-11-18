@@ -43,16 +43,16 @@ class animal : public sf::RectangleShape
 public:
 	
     // Default constructor
-    animal() : hunger(0), age(0), weight(0.0f), sleep(false), name(""), behavior(Behavior::CALM), gender(Gender::MALE), healthStatus(HealthStatus::HEALTHY) {}
+    animal() : hunger(0), age(0), weight(0.0f), sleep(false), name(), behavior(Behavior::CALM), gender(Gender::MALE), healthStatus(HealthStatus::HEALTHY) {}
 
     // Destructor
     ~animal() {}
 
     // Setter functions
 
-    void setName(const std::string& newName)
+    void setName(const sf::Text& newName)
     {
-        name = newName;
+        name.setString(newName.getString());
     }
 
     void setAge(unsigned int newAge)
@@ -102,7 +102,7 @@ public:
 
     // Getter functions
 
-    const std::string& getName() const
+    const sf::Text& getName() const
     {
         return name;
     }
@@ -148,7 +148,7 @@ private:
 	int age;
 	float weight;
 	bool sleep;
-	std::string name;	
+	sf::Text name;	
 	Behavior behavior;
 	Gender gender;
 	HealthStatus healthStatus;
