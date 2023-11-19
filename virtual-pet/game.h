@@ -2,12 +2,14 @@
 
 #include "includes.h"
 #include "window.h"
+#include "dog.h"
+// include other animal headers here
 
 class Game {
 public:
 
 	// Game() constructor
-	Game() : window("Virtual-pet", sf::Vector2u(500,500))
+	Game() : window("Virtual-pet", sf::Vector2u(500,500)), dog()
 	{
 		
 	}
@@ -34,6 +36,7 @@ public:
 	void Render()
 	{
 		window.BeginDraw();
+		window.Draw(dog);
 		window.EndDraw();
 	}
 
@@ -43,7 +46,23 @@ public:
 		return& window;
 	}
 
+	// GetElapsed() function that measures the time elapsed since the last instance of the clock being restarted
+	sf::Time GetElapsed()
+	{
+		return elapsed;
+	}
+
+	// RestartClock() function that restarts the clock/works in tandem with GetElapsed() function
+	void RestartClock()
+	{
+		elapsed = clock.restart();
+	}
+
 private:
 
 	Window window;
+	sf::Clock clock;
+	sf::Time elapsed;
+	Dog dog;
+
 };

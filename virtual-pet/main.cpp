@@ -1,4 +1,8 @@
 #include "includes.h"
+#include "game.h"
+
+
+// wont need to include these later down the line
 #include "dog.h"
 #include "button.h"
 
@@ -43,32 +47,54 @@ int main()
     Dog dog(sf::Vector2f(250,250)); // have to rework this so that the position doesn't keep getting set to the middle
     
     
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+    Game game;
 
-        // updates where the mouse is in the screen
-        mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-
-        // Get the elapsed time since the last frame
-        sf::Time dt = sf::seconds(1.0f / 60.0f);  // Assuming a frame rate of 60 frames per second
-
-        // Call the updatePosition function to update the dog's position
-        dog.updatePosition(dt.asSeconds());
-
-        window.clear();
-        window.draw(background);
-        locationPosition.update(mousePosView);
-        locationPosition.render(&window);
-        window.draw(currentTime);
-        dog.render(&window);
-        window.display();
+    while (!game.GetWindow()->IsDone()) {
+        // Game loop
+        game.HandleInput();
+        game.Update();
+        game.Render();
+        game.RestartClock(); // Restarting our clock
     }
+
+
+
+
+
+
+
+
+
+
+
+    // old way to use start the game
+    
+    //while (window.isOpen())
+    //{
+    //    sf::Event event;
+    //    while (window.pollEvent(event))
+    //    {
+    //        if (event.type == sf::Event::Closed)
+    //            window.close();
+    //    }
+
+    //    // updates where the mouse is in the screen
+    //    mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+    //    // Get the elapsed time since the last frame
+    //    sf::Time dt = sf::seconds(1.0f / 60.0f);  // Assuming a frame rate of 60 frames per second
+
+    //    // Call the updatePosition function to update the dog's position
+    //    dog.updatePosition(dt.asSeconds());
+
+    //    window.clear();
+    //    window.draw(background);
+    //    locationPosition.update(mousePosView);
+    //    locationPosition.render(&window);
+    //    window.draw(currentTime);
+    //    dog.render(&window);
+    //    window.display();
+    //}
 
     return 0;
 }
