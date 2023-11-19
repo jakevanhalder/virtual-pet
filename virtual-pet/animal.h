@@ -145,26 +145,21 @@ public:
         return sleep;
     }
 
-private:
-
     // AnimalMovement() function that serves as the general movement for all animals in the game
-    void AnimalMovement(animal& animalInstance, float dt)
+    void AnimalMovement(float dt)
     {
         // Update the time since the last random move
-        animalInstance.timeSinceLastRandomMove += dt;
-
+        timeSinceLastRandomMove += dt;
         // Check if it's time to make a random move
-        if (animalInstance.timeSinceLastRandomMove >= animalInstance.timeBetweenRandomMoves)
+        if (timeSinceLastRandomMove >= timeBetweenRandomMoves)
         {
             // Reset the timer
-            animalInstance.timeSinceLastRandomMove = 0;
-
+            timeSinceLastRandomMove = 0;
             // Randomly choose a new movement state
             int randomValue = std::rand() % 100; // A random number between 0 and 99
-
             if (randomValue < idleProbability)
             {
-                animalInstance.movement = Movement::IDLE;
+                movement = Movement::IDLE;
             }
             else
             {
@@ -172,98 +167,93 @@ private:
                 switch (std::rand() % 8)
                 {
                 case 0:
-                    animalInstance.movement = Movement::UP;
+                    movement = Movement::UP;
                     break;
                 case 1:
-                    animalInstance.movement = Movement::DOWN;
+                    movement = Movement::DOWN;
                     break;
                 case 2:
-                    animalInstance.movement = Movement::LEFT;
+                    movement = Movement::LEFT;
                     break;
                 case 3:
-                    animalInstance.movement = Movement::RIGHT;
+                    movement = Movement::RIGHT;
                     break;
                 case 4:
-                    animalInstance.movement = Movement::UPLEFT;
+                    movement = Movement::UPLEFT;
                     break;
                 case 5:
-                    animalInstance.movement = Movement::UPRIGHT;
+                    movement = Movement::UPRIGHT;
                     break;
                 case 6:
-                    animalInstance.movement = Movement::DOWNLEFT;
+                    movement = Movement::DOWNLEFT;
                     break;
                 case 7:
-                    animalInstance.movement = Movement::DOWNRIGHT;
+                    movement = Movement::DOWNRIGHT;
                     break;
                 case 8:
-                    animalInstance.movement = Movement::IDLE;
+                    movement = Movement::IDLE;
                     break;
                 }
             }
         }
 
-        sf::Vector2f currentPosition = animalInstance.getPosition();
-
+        sf::Vector2f currentPosition = getPosition();
         // Modify the position based on the current movement
-        switch (animalInstance.movement)
+        switch (movement)
         {
         case Movement::UP:
-            currentPosition.y -= (animalInstance.movementSpeed * dt);
+            currentPosition.y -= movementSpeed;
             break;
         case Movement::DOWN:
-            currentPosition.y += animalInstance.movementSpeed;
+            currentPosition.y += movementSpeed;
             break;
         case Movement::LEFT:
-            currentPosition.x -= animalInstance.movementSpeed;
+            currentPosition.x -= movementSpeed;
             break;
         case Movement::RIGHT:
-            currentPosition.x += animalInstance.movementSpeed;
+            currentPosition.x += movementSpeed;
             break;
         case Movement::UPLEFT:
-            currentPosition.x -= animalInstance.movementSpeed;
-            currentPosition.y -= animalInstance.movementSpeed;
+            currentPosition.x -= movementSpeed;
+            currentPosition.y -= movementSpeed;
             break;
         case Movement::UPRIGHT:
-            currentPosition.x += animalInstance.movementSpeed;
-            currentPosition.y -= animalInstance.movementSpeed;
+            currentPosition.x += movementSpeed;
+            currentPosition.y -= movementSpeed;
             break;
         case Movement::DOWNLEFT:
-            currentPosition.x -= animalInstance.movementSpeed;
-            currentPosition.y += animalInstance.movementSpeed;
+            currentPosition.x -= movementSpeed;
+            currentPosition.y += movementSpeed;
             break;
         case Movement::DOWNRIGHT:
-            currentPosition.x += animalInstance.movementSpeed;
-            currentPosition.y += animalInstance.movementSpeed;
+            currentPosition.x += movementSpeed;
+            currentPosition.y += movementSpeed;
             break;
         case Movement::IDLE:
             // No movement
             break;
         }
-
         // Check boundaries to ensure the dog stays within the window
         /*sf::Vector2f windowSize = sf::Vector2f(500, 500);
-
         if (currentPosition.x = getPosition().x < 0)
             currentPosition.x = 0;
         else if (currentPosition.x = getPosition().x > windowSize.x)
             currentPosition.x = windowSize.x;
-
         if (currentPosition.y = getPosition().y < 0)
             currentPosition.y = 0;
         else if (currentPosition.y = getPosition().y > windowSize.y)
             currentPosition.y = windowSize.y;*/
-
-        // Update the animals current position
-        animalInstance.move(currentPosition);
+            // Update the position
+        move(currentPosition);
 
     }
-    
-    // animal class private variables
+
+private:
 
     Movement movement;
     float movementSpeed = 0.025f;
     float timeSinceLastRandomMove;
-    float timeBetweenRandomMoves = 25.0f; // Time in seconds between random moves
+    float timeBetweenRandomMoves = 5.0f; // Time in seconds between random moves
     int idleProbability = 70; // Probability (in percentage) of IDLE state / change this later so that we set each animals instance to be differing values i.e sloth
 
 	int hunger;

@@ -24,7 +24,7 @@ public:
 		this->text.setCharacterSize(24);
 		this->shape.setPosition(
 			(this->text.getPosition().x + this->text.getGlobalBounds().width / 2.0) - this->shape.getGlobalBounds().width / 2.0,
-			(this->text.getPosition().y + this->text.getGlobalBounds().height / 2.0) - this->shape.getGlobalBounds().height / 2.0 - 13
+			(this->text.getPosition().y + this->text.getGlobalBounds().height / 2.0) - this->shape.getGlobalBounds().height / 2.0 - 13.0
 		);
 
 		this->idleColor = newIdleColor;

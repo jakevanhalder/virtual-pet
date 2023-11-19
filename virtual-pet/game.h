@@ -11,7 +11,7 @@ public:
 	// Game() constructor
 	Game() : window("Virtual-pet", sf::Vector2u(500,500)), dog()
 	{
-		
+		dog.setPosition(sf::Vector2f(window.GetWindowSize().x / 2, window.GetWindowSize().y	/ 2));
 	}
 
 	// Game destructor
@@ -26,10 +26,11 @@ public:
 
 	}
 
-	// Update() function that updates the games objects
+	// Update() function that updates the games window
 	void Update()
 	{
-		window.Update();
+		window.Update(); // update window events
+		dog.AnimalMovement(elapsed.asSeconds());
 	}
 
 	// Render() function that renders in all of the objects for the game
